@@ -22,6 +22,7 @@ public class MemberServiceImp implements MemberService {
 
     @Override
     public Long createMember(MemberDTO memberDTO) {
+        System.out.println(memberDTO.getFirstName());
         Member memberDAO = memberMapper.toDAO(memberDTO);
         Member member = memberRepository.save(memberDAO);
         return member.getId();
