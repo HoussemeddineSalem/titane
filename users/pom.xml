@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dev.titane</groupId>
-	<artifactId>users</artifactId>
+	<artifactId>api-users</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api-users</name>
 	<description>Demo project for Spring Boot</description>

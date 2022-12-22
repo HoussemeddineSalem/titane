@@ -1,10 +1,8 @@
 package dev.titane.users.controllers;
 
-import dev.titane.users.entities.Member;
 import dev.titane.users.models.MemberDTO;
 import dev.titane.users.services.MemberService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
