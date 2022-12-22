@@ -1,5 +1,6 @@
 package dev.titane.users.controllers;
 
+import dev.titane.users.entities.Member;
 import dev.titane.users.models.MemberDTO;
 import dev.titane.users.services.MemberService;
 import lombok.AllArgsConstructor;
@@ -18,14 +19,31 @@ public class MemberController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long createMember(@RequestBody MemberDTO memberDTO){
+    public Long createMember(@RequestBody MemberDTO memberDTO) {
         return memberService.createMember(memberDTO);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<MemberDTO> getMember(){
-        return memberService.getMembers(null,null,null);
+    public List<MemberDTO> getMember(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String email) {
+        return memberService.getMembers(firstName, lastName, email);
+    }
+
+    @PutMapping("/{memberId}")
+    @ResponseStatus(HttpStatus.OK)
+    public MemberDTO updateMember(
+            @PathVariable("memberId") Long memberId,
+            @RequestBody MemberDTO memberDTO) {
+        return memberService.updateMember(memberId, memberDTO);
+    }
+
+    @DeleteMapping("/{memberId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteMember(@PathVariable("memberId") Long memberId) {
+        memberService.deleteMember(memberId);
     }
 
 }

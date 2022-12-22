@@ -9,7 +9,9 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -41,10 +43,15 @@ public class MemberServiceImp implements MemberService {
     }
 
     @Override
-    public MemberDTO updateMember(MemberDTO memberDTO) {
+    public MemberDTO updateMember(Long memberId, MemberDTO memberDTO) {
 
-        Member memberDAO = memberMapper.toDAO(memberDTO);
-        Member member = memberRepository.save(memberDAO);
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> {
+                    throw new EntityNotFoundException("NOT FOUND");
+                });
+
+        memberMapper.updateDAO(memberDTO, member);
+        memberRepository.save(member);
 
         return memberMapper.toDTO(member);
     }

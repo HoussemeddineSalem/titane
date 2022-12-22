@@ -11,7 +11,7 @@ public interface MemberService {
 
     List<MemberDTO> getMembers(String firstName, String lastName, String email);
 
-    MemberDTO updateMember(MemberDTO memberDTO);
+    MemberDTO updateMember(Long memberId,MemberDTO memberDTO);
 
     void deleteMember(Long memberId);
 }
