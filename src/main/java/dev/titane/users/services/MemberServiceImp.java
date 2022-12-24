@@ -34,7 +34,7 @@ public class MemberServiceImp implements MemberService {
 
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
 
-        Example<Member> exampleQuery = Example.of(new Member(null, firstName, lastName, email), matcher);
+        Example<Member> exampleQuery = Example.of(new Member(null, firstName, lastName, email,null), matcher);
         List<Member> memberList = memberRepository.findAll(exampleQuery);
 
         return memberList.stream().map(member -> memberMapper.toDTO(member)).collect(Collectors.toList());
