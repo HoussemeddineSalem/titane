@@ -1,6 +1,7 @@
 package dev.titane.users.services;
 
 import dev.titane.users.entities.Member;
+import dev.titane.users.errors.ErrorResponses;
 import dev.titane.users.models.MemberDTO;
 import dev.titane.users.repositories.MemberRepository;
 import dev.titane.users.utils.MemberMapper;
@@ -9,9 +10,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -46,7 +45,7 @@ public class MemberServiceImp implements MemberService {
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> {
-                    throw new EntityNotFoundException("NOT FOUND");
+                    throw new RuntimeException(ErrorResponses.NO_USERS_FOUND.getMessage());
                 });
 
         memberMapper.updateDAO(memberDTO, member);
